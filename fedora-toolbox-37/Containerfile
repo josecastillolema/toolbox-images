@@ -16,10 +16,10 @@ RUN dnf -y copr enable karmab/kcli \
     && dnf -y install kcli
 
 # Alias definition
-RUN echo '#! /bin/sh'                                             >> /bin/code
+RUN echo '#! /bin/sh'                                                  >> /bin/code
 RUN echo 'flatpak-spawn --host flatpak run com.visualstudio.code "$@"' >> /bin/code
 RUN chmod +x /bin/code
-RUN echo '#! /bin/sh'                  >> /bin/podman
+RUN echo '#! /bin/sh'                       >> /bin/podman
 RUN echo 'flatpak-spawn --host podman "$@"' >> /bin/podman
 RUN chmod +x /bin/podman
 
