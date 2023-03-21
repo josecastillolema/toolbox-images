@@ -1,0 +1,32 @@
+# podman build -t localhost/toolbox-local:37 .
+# toolbox create -i localhost/toolbox-local:37 fedora-toolbox-37
+
+FROM registry.fedoraproject.org/fedora-toolbox:37
+
+ENV PATH="$PATH:~/.local/bin/toolbox"
+
+# Update base packages
+RUN sudo dnf -y upgrade
+
+# Solve new terminal issue
+RUN source /run/.containerenv \
+    && printf "\033]777;container;pop;;\033\\"
+
+# Install packages
+RUN dnf install -y @development-tools jq python-pip golang mlocate tmux
+
+# Install kcli
+RUN dnf -y copr enable karmab/kcli \
+    && dnf -y install kcli
+
+# Alias definition
+RUN echo '#! /bin/sh'                                             >> /bin/code
+RUN echo 'flatpak-spawn --host flatpak run com.visualstudio.code "$@"' >> /bin/code
+RUN chmod +x /bin/code
+RUN echo '#! /bin/sh'                  >> /bin/podman
+RUN echo 'flatpak-spawn --host podman "$@"' >> /bin/podman
+RUN chmod +x /bin/podman
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
