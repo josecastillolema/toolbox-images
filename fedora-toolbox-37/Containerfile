@@ -8,10 +8,6 @@ ENV PATH="$PATH:~/.local/bin/toolbox"
 # Update base packages
 RUN sudo dnf -y upgrade
 
-# Solve new terminal issue
-RUN source /run/.containerenv \
-    && printf "\033]777;container;pop;;\033\\"
-
 # Install packages
 RUN dnf install -y @development-tools jq python-pip golang mlocate tmux
 
