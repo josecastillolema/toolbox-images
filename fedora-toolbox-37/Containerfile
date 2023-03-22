@@ -9,7 +9,7 @@ ENV PATH="$PATH:~/.local/bin/toolbox"
 RUN sudo dnf -y upgrade
 
 # Install packages
-RUN dnf install -y @development-tools jq python-pip golang mlocate tmux
+RUN dnf install -y @development-tools jq python-pip golang mlocate tmux vim-enhanced
 
 # Install kcli
 RUN dnf -y copr enable karmab/kcli \
