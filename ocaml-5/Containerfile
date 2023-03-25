@@ -1,0 +1,17 @@
+# podman build -t localhost/ocaml .
+# toolbox create -i localhost/ocaml ocaml
+
+FROM registry.fedoraproject.org/fedora-toolbox:37
+
+# Update base packages
+RUN dnf -y upgrade
+
+# Install opam
+RUN dnf install -y opam
+
+# Inicialize opam
+RUN opam init --disable-sandboxing
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
