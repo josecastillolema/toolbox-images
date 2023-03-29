@@ -1,0 +1,24 @@
+# podman build -t localhost/kubemark .
+# toolbox create -i localhost/kubemark kubemark
+
+FROM registry.fedoraproject.org/fedora-toolbox:37
+
+# Update base packages
+RUN dnf -y upgrade
+
+# Install opam
+RUN dnf install -y @development-tools golang
+
+# Install kubebuilder
+RUN wget https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH) -O kubebuilder \
+    && install -o root -g root -m 0755 kubebuilder /usr/local/bin/kubebuilder \
+    && rm kubebuilder
+
+# Install kustomize
+RUN curl https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash \
+    && sudo install -o root -g root -m 0755 kustomize /usr/local/bin/kustomize \
+    && rm kustomize 
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
