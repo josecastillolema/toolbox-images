@@ -7,7 +7,7 @@ FROM registry.fedoraproject.org/fedora-toolbox:37
 RUN dnf -y upgrade
 
 # Install packages
-RUN dnf install -y @development-tools jq python-pip golang mlocate tmux vim-enhanced
+RUN dnf install -y @development-tools jq python-pip golang mlocate tmux vim-enhanced pcp-system-tools
 
 # Install kcli
 RUN dnf -y copr enable karmab/kcli \
