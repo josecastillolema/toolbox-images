@@ -1,0 +1,18 @@
+# podman build -t localhost/toolbox-local:38 .
+# toolbox create -i localhost/toolbox-local:38 fedora-toolbox-38
+
+FROM registry.fedoraproject.org/fedora-toolbox:38
+
+# Update base packages
+RUN dnf -y upgrade
+
+# Install packages
+RUN dnf install -y @development-tools jq python-pip golang mlocate tmux vim-enhanced
+
+# Install kcli
+RUN dnf -y copr enable karmab/kcli \
+    && dnf -y install kcli
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
