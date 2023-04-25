@@ -1,7 +1,7 @@
 # podman build -t localhost/ocaml .
 # toolbox create -i localhost/ocaml ocaml
 
-FROM registry.fedoraproject.org/fedora-toolbox:37
+FROM registry.fedoraproject.org/fedora-toolbox:38
 
 # Update base packages
 RUN dnf -y upgrade
