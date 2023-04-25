@@ -19,6 +19,14 @@ RUN curl https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack
     && sudo install -o root -g root -m 0755 kustomize /usr/local/bin/kustomize \
     && rm kustomize 
 
+# Clone cluster-api repos
+RUN git clone https://github.com/kubernetes-sigs/cluster-api.git
+
+# Compile and install clusterctl
+RUN cd cluster-api \
+    && make clusterctl \
+    && sudo install -o root -g root -m 0755 bin/clusterctl /usr/local/bin/clusterctl
+
 # Clean
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
