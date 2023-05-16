@@ -6,7 +6,7 @@ FROM registry.fedoraproject.org/fedora-toolbox:37
 # Update base packages
 RUN dnf -y upgrade
 
-# Install opam
+# Install golang
 RUN dnf install -y @development-tools golang
 
 # Install kubebuilder
