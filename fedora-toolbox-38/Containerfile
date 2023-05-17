@@ -7,11 +7,15 @@ FROM registry.fedoraproject.org/fedora-toolbox:38
 RUN dnf -y upgrade
 
 # Install packages
-RUN dnf install -y @development-tools jq python-pip golang mlocate tmux vim-enhanced ipython
+# vim-enanced provides vimdiff
+RUN dnf install -y @development-tools jq python-pip golang mlocate ipython vim-enhanced 
 
 # Install kcli
 RUN dnf -y copr enable karmab/kcli \
     && dnf -y install kcli
+
+# Configure virt groups
+RUN sudo usermod -aG qemu,libvirt $(id -un) 
 
 # Clean
 RUN dnf clean all \
