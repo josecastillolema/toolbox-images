@@ -1,21 +1,25 @@
-# podman build -t localhost/toolbox-local:38 .
-# toolbox create -i localhost/toolbox-local:38 fedora-toolbox-38
+##podman build --build-arg user=$USER -t localhost/toolbox:38 .
+# podman build -t localhost/toolbox:38 .
+# toolbox create -i localhost/toolbox:38 fedora-toolbox-38
 
 FROM registry.fedoraproject.org/fedora-toolbox:38
+
+#ARG user
 
 # Update base packages
 RUN dnf -y upgrade
 
 # Install packages
 # vim-enanced provides vimdiff
-RUN dnf install -y @development-tools jq python-pip golang mlocate ipython vim-enhanced 
+RUN dnf install -y @development-tools jq python-pip golang mlocate ipython vim-enhanced
+#qemu libvirt libvirt-daemon-driver-qemu qemu-kvm 
 
 # Install kcli
 RUN dnf -y copr enable karmab/kcli \
     && dnf -y install kcli
 
 # Configure virt groups
-RUN sudo usermod -aG qemu,libvirt $(id -un) 
+#RUN sudo usermod -aG qemu,libvirt $user
 
 # Clean
 RUN dnf clean all \

@@ -1,5 +1,5 @@
-# podman build -t localhost/ocaml .
-# toolbox create -i localhost/ocaml ocaml
+# podman build -t localhost/ocaml:5 .
+# toolbox create -i localhost/ocaml:5 ocaml
 
 FROM registry.fedoraproject.org/fedora-toolbox:38
 
