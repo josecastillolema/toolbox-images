@@ -6,12 +6,14 @@ FROM registry.fedoraproject.org/fedora-toolbox:38
 
 #ARG user
 
+# Disable h264 repo
+RUN dnf config-manager --set-disabled fedora-cisco-openh264 
+
 # Update base packages
 RUN dnf -y upgrade
 
 # Install packages
-# vim-enanced provides vimdiff
-RUN dnf install -y @development-tools jq python-pip golang mlocate ipython vim-enhanced
+RUN dnf install -y @development-tools python-pip golang ipython
 #qemu libvirt libvirt-daemon-driver-qemu qemu-kvm 
 
 # Install kcli
