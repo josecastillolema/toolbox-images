@@ -1,6 +1,5 @@
 ##podman build --build-arg user=$USER -t localhost/toolbox:38 .
 # podman build -t localhost/toolbox:38 .
-# toolbox create -i localhost/toolbox:38 fedora-toolbox-38
 
 FROM registry.fedoraproject.org/fedora-toolbox:38
 
@@ -13,7 +12,7 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 RUN dnf -y upgrade
 
 # Install packages
-RUN dnf install -y @development-tools python-pip golang ipython
+RUN dnf install -y @development-tools python-pip golang ipython ansible
 #qemu libvirt libvirt-daemon-driver-qemu qemu-kvm 
 
 # Install kcli
@@ -26,3 +25,5 @@ RUN dnf -y copr enable karmab/kcli \
 # Clean
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
+
+RUN echo "toolbox create -i localhost/toolbox:38 fedora-toolbox-38"

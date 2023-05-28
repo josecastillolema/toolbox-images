@@ -1,7 +1,11 @@
-# podman build -t localhost/ocaml:5 .
-# toolbox create -i localhost/ocaml:5 ocaml
+# podman build --build-arg user=$USER -t localhost/ocaml:5 .
 
 FROM registry.fedoraproject.org/fedora-toolbox:38
+
+ARG user
+
+# Disable h264 repo
+RUN dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Update base packages
 RUN dnf -y upgrade
@@ -10,8 +14,15 @@ RUN dnf -y upgrade
 RUN dnf install -y opam
 
 # Inicialize opam
+RUN useradd $user
+USER $user
 RUN opam init --disable-sandboxing
+RUN opam install -y dune merlin ocaml-lsp-server odoc ocamlformat utop dune-release
 
 # Clean
+USER root
+RUN cp -r /home/jose/.opam /root/.opam
+RUN userdel -r jose
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
+RUN echo "toolbox create -i localhost/ocaml:5 ocaml"
