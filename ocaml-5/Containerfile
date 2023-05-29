@@ -21,7 +21,8 @@ RUN opam install -y dune merlin ocaml-lsp-server odoc ocamlformat utop dune-rele
 
 # Clean
 USER root
-RUN cp -r /home/jose/.opam /root/.opam
+RUN mkdir /usr/share/opam/
+RUN cp -r /home/jose/.opam /usr/share/opam
 RUN userdel -r jose
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
