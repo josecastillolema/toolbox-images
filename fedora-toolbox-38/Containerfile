@@ -13,7 +13,7 @@ RUN dnf -y upgrade
 
 # Install packages
 # - jq for kind.sh
-RUN dnf install -y @development-tools ansible golang ipython jq python-pip
+RUN dnf install -y @development-tools ansible golang ipython jq python-pip xev
 #qemu libvirt libvirt-daemon-driver-qemu qemu-kvm 
 
 # Install kcli
