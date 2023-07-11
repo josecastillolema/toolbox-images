@@ -17,7 +17,7 @@ RUN dnf install -y opam
 RUN useradd $user
 USER $user
 RUN opam init --disable-sandboxing
-RUN opam install -y dune merlin ocaml-lsp-server odoc ocamlformat utop dune-release
+RUN opam install -y dune merlin ocaml-lsp-server odoc ocamlformat utop dune-release core
 
 # Clean
 USER root
