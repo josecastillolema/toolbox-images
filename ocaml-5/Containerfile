@@ -11,13 +11,30 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 RUN dnf -y upgrade
 
 # Install opam
-RUN dnf install -y opam
+RUN dnf install -y \
+   emacs \
+   emacs-nox \
+   fira-code-fonts \
+   gmp-devel \
+   opam
 
 # Inicialize opam
 RUN useradd $user
 USER $user
 RUN opam init --disable-sandboxing
-RUN opam install -y dune merlin ocaml-lsp-server odoc ocamlformat utop dune-release core
+RUN opam install -y \
+   core \
+   dune \
+   dune-release \
+   merlin \
+   ocaml-lsp-server \
+   ocamlformat \
+   ocp-indent \
+   odoc \
+   ounit2 \
+   tuareg \
+   user-setup \
+   utop
 
 # Clean
 USER root
