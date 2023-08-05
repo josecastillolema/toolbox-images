@@ -11,10 +11,13 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 RUN dnf -y upgrade
 
 # Install opam
+# - glibc-static for static compiling
+# - gmp-devel for ocaml emacs integration
 RUN dnf install -y \
    emacs \
    emacs-nox \
    fira-code-fonts \
+   glibc-static \
    gmp-devel \
    opam
 
