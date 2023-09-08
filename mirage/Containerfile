@@ -1,4 +1,4 @@
-# podman build --build-arg user=$USER -t localhost/ocaml:5 .
+# podman build --build-arg user=$USER -t localhost/mirage .
 
 FROM registry.fedoraproject.org/fedora-toolbox:38
 
@@ -13,23 +13,24 @@ RUN dnf -y upgrade
 # Install opam
 # - glibc-static for static linking
 # - gmp-devel for ocaml emacs integration
+# - libseccomp-devel for mirage
 RUN dnf install -y \
-   emacs \
    emacs-nox \
-   fira-code-fonts \
    glibc-static \
    gmp-devel \
+   libseccomp-devel \
    opam
 
 # Inicialize opam
 RUN useradd $user
 USER $user
-RUN opam init --disable-sandboxing
+RUN opam init --disable-sandboxing --compiler 4.14.1
 RUN opam install -y \
    core \
    dune \
    dune-release \
    merlin \
+   mirage \
    ocaml-lsp-server \
    ocamlformat \
    ocp-indent \
@@ -45,4 +46,4 @@ RUN mv /home/$user/.opam /usr/share/opam
 RUN userdel -r $user
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
-RUN echo "toolbox create -i localhost/ocaml:5 ocaml"
+RUN echo "toolbox create -i localhost/mirage mirage"
