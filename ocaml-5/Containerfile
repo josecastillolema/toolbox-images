@@ -1,20 +1,18 @@
-# podman build --build-arg user=$USER -t localhost/ocaml:5 .
+# podman build -t localhost/ocaml:5 .
 
 FROM registry.fedoraproject.org/fedora-toolbox:38
-
-ARG user
 
 # Disable h264 repo
 RUN dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Update base packages
-RUN dnf -y upgrade
+#RUN dnf -y upgrade
 
 # Install opam
+# - fira-code-fonts to be revaluated
 # - glibc-static for static linking
 # - gmp-devel for ocaml emacs integration
 RUN dnf install -y \
-   emacs \
    emacs-nox \
    fira-code-fonts \
    glibc-static \
@@ -22,10 +20,8 @@ RUN dnf install -y \
    opam
 
 # Inicialize opam
-RUN useradd $user
-USER $user
-RUN opam init --disable-sandboxing
-RUN opam install -y \
+RUN opam init --disable-sandboxing --root /opt/opam
+RUN opam install -y --root /opt/opam \
    core \
    dune \
    dune-release \
@@ -40,9 +36,6 @@ RUN opam install -y \
    utop
 
 # Clean
-USER root
-RUN mv /home/$user/.opam /usr/share/opam
-RUN userdel -r $user
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
 RUN echo "toolbox create -i localhost/ocaml:5 ocaml"

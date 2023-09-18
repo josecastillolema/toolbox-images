@@ -9,7 +9,7 @@ FROM registry.fedoraproject.org/fedora-toolbox:38
 RUN dnf config-manager --set-disabled fedora-cisco-openh264 
 
 # Update base packages
-RUN dnf -y upgrade
+#RUN dnf -y upgrade
 
 # Install packages
 # - jq for kind.sh

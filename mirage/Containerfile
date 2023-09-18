@@ -1,14 +1,12 @@
-# podman build --build-arg user=$USER -t localhost/mirage .
+# podman build -t localhost/mirage .
 
 FROM registry.fedoraproject.org/fedora-toolbox:38
-
-ARG user
 
 # Disable h264 repo
 RUN dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Update base packages
-RUN dnf -y upgrade
+#RUN dnf -y upgrade
 
 # Install opam
 # - glibc-static for static linking
@@ -22,10 +20,8 @@ RUN dnf install -y \
    opam
 
 # Inicialize opam
-RUN useradd $user
-USER $user
-RUN opam init --disable-sandboxing --compiler 4.14.1
-RUN opam install -y \
+RUN opam init --disable-sandboxing --root /opt/opam --compiler 4.14.1
+RUN opam install -y --root /opt/opam \
    core \
    dune \
    dune-release \
@@ -41,9 +37,6 @@ RUN opam install -y \
    utop
 
 # Clean
-USER root
-RUN mv /home/$user/.opam /usr/share/opam
-RUN userdel -r $user
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
 RUN echo "toolbox create -i localhost/mirage mirage"
