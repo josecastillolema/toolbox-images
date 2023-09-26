@@ -1,0 +1,23 @@
+# podman build -t localhost/opam .
+
+FROM registry.fedoraproject.org/fedora-toolbox:38
+
+# Disable h264 repo
+RUN dnf config-manager --set-disabled fedora-cisco-openh264
+
+# Update base packages
+#RUN dnf -y upgrade
+
+# Dev utils
+RUN dnf install -y \
+   @development-tools
+
+# Install opam
+RUN wget https://github.com/ocaml/opam/releases/download/2.1.5/opam-2.1.5-x86_64-linux
+RUN mv opam-2.1.5-x86_64-linux /usr/local/bin/opam
+RUN chmod +x /usr/local/bin/opam
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
+RUN echo "toolbox create -i localhost/opam opam"
