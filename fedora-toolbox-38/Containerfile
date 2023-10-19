@@ -13,14 +13,20 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Install packages
 # - jq, openssl for kind.sh
+# - glibc-static and libzstd-static for ocaml static linking
+# - emacs-nox and gmp-devel for ocaml emacs integration
 RUN dnf install -y \
    @development-tools \
    ansible \
    awscli2 \
+   emacs-nox \
    flatpak-builder \
+   glibc-static \
+   gmp-devel \
    golang \
    ipython \
    jq \
+   libzstd-static \
    openssl \
    python-pip \
    xev
