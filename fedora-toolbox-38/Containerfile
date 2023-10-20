@@ -12,9 +12,10 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 #RUN dnf -y upgrade
 
 # Install packages
-# - jq, openssl for kind.sh
 # - glibc-static and libzstd-static for ocaml static linking
+# - jq, openssl for kind.sh
 # - emacs-nox and gmp-devel for ocaml emacs integration
+# - openssl-devel for compiling python
 RUN dnf install -y \
    @development-tools \
    ansible \
@@ -28,8 +29,9 @@ RUN dnf install -y \
    jq \
    libzstd-static \
    openssl \
-   python-pip \
+   openssl-devel \
    xev
+#python-pip
 #qemu libvirt libvirt-daemon-driver-qemu qemu-kvm 
 
 # Install kcli
