@@ -6,7 +6,7 @@ FROM registry.fedoraproject.org/fedora-toolbox:38
 #ARG user
 
 # Disable h264 repo
-RUN dnf config-manager --set-disabled fedora-cisco-openh264 
+RUN dnf config-manager --set-disabled fedora-cisco-openh264
 
 # Update base packages
 #RUN dnf -y upgrade
@@ -15,6 +15,7 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 # - glibc-static and libzstd-static for ocaml static linking
 # - jq, openssl for kind.sh
 # - emacs-nox and gmp-devel for ocaml emacs integration
+# - ncurses-devel for python readline
 # - openssl-devel for compiling python
 RUN dnf install -y \
    @development-tools \
@@ -28,11 +29,13 @@ RUN dnf install -y \
    ipython \
    jq \
    libzstd-static \
+   ncurses-devel \
    openssl \
    openssl-devel \
+   p7zip \
    xev
 #python-pip
-#qemu libvirt libvirt-daemon-driver-qemu qemu-kvm 
+#qemu libvirt libvirt-daemon-driver-qemu qemu-kvm
 
 # Install kcli
 RUN dnf -y copr enable karmab/kcli \
