@@ -23,4 +23,4 @@ RUN opam init --disable-sandboxing --root /opt/opam  --compiler 5.0.0
 # Clean
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
-RUN echo "toolbox create -i localhost/ocamlmin ocamlmin"
+RUN echo "toolbox create -i localhost/ocaml-min ocaml-min"
