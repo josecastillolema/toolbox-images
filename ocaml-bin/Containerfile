@@ -1,0 +1,33 @@
+# podman build -t localhost/ocaml-bin .
+FROM registry.fedoraproject.org/fedora-toolbox:39
+
+# Disable h264 repo
+RUN dnf config-manager --set-disabled fedora-cisco-openh264
+
+# Update base packages
+#RUN dnf -y upgrade
+
+# Dev utils
+RUN dnf install -y \
+   @development-tools
+
+# Install ocaml
+RUN git clone https://github.com/ocaml/ocaml
+RUN pushd ocaml && \
+    ./configure && \
+    make        && \
+    make install
+RUN ocaml --version
+
+# Install dune
+RUN git clone https://github.com/ocaml/dune
+RUN echo $PATH
+RUN pushd dune   && \
+    make release && \
+    PREFIX=/usr/local make install
+RUN dune --version
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
+RUN echo "toolbox create -i localhost/ocaml-bin ocaml-bin"

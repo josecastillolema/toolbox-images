@@ -1,6 +1,6 @@
 # podman build -t localhost/opam .
 
-FROM registry.fedoraproject.org/fedora-toolbox:38
+FROM registry.fedoraproject.org/fedora-toolbox:39
 
 # Disable h264 repo
 RUN dnf config-manager --set-disabled fedora-cisco-openh264

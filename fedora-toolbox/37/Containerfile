@@ -4,7 +4,7 @@
 FROM registry.fedoraproject.org/fedora-toolbox:37
 
 # Update base packages
-RUN dnf -y upgrade
+#RUN dnf -y upgrade
 
 # Install packages
 RUN dnf install -y @development-tools jq python-pip golang mlocate tmux vim-enhanced pcp-system-tools
