@@ -20,6 +20,7 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 RUN dnf install -y \
    @development-tools \
    awscli2 \
+   bats \
    flatpak-builder \
    glibc-static \
    jq \

@@ -10,6 +10,7 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 # Dev utils
 RUN dnf install -y \
    @development-tools
+   #gtk2-devel
 
 # Install ocaml
 RUN git clone https://github.com/ocaml/ocaml
