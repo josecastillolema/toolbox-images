@@ -21,3 +21,5 @@ RUN chmod +x /usr/local/bin/opam
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
 RUN echo "toolbox create -i localhost/opam opam"
+RUN echo "toolbox enter opam"
+

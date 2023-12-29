@@ -40,3 +40,5 @@ RUN opam install -y --root /opt/opam \
 RUN dnf clean all \
     && rm -rf /var/cache/dnf
 RUN echo "toolbox create -i localhost/mirage mirage"
+RUN echo "toolbox enter mirage"
+

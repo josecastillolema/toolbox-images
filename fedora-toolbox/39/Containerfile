@@ -45,3 +45,5 @@ RUN dnf clean all \
     && rm -rf /var/cache/dnf
 
 RUN echo "toolbox create -i localhost/toolbox:39 fedora-toolbox-39"
+RUN echo "toolbox enter"
+
