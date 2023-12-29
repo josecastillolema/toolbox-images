@@ -44,3 +44,5 @@ RUN dnf clean all \
     && rm -rf /var/cache/dnf
 
 RUN echo "toolbox create -i localhost/perf-tuning:8.0 perf-tuning"
+RUN echo "toolbox enter perf-tuning"
+
