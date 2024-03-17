@@ -27,14 +27,15 @@ RUN dnf install -y \
    jq \
    libzstd-static \
    ncurses-devel \
-   # python3-virtualenvwrapper
    openssl \
    openssl-devel \
    p7zip \
+   podman \
    tmate \
    xev
-#python-pip
-#qemu libvirt libvirt-daemon-driver-qemu qemu-kvm
+# python3-virtualenvwrapper
+# python-pip
+# qemu libvirt libvirt-daemon-driver-qemu qemu-kvm
 
 # Install kcli
 RUN dnf -y copr enable karmab/kcli \
