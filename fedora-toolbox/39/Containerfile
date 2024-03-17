@@ -21,14 +21,17 @@ RUN dnf install -y \
    @development-tools \
    awscli2 \
    bats \
+   docker-compose \
    flatpak-builder \
    glibc-static \
    jq \
    libzstd-static \
    ncurses-devel \
+   # python3-virtualenvwrapper
    openssl \
    openssl-devel \
    p7zip \
+   tmate \
    xev
 #python-pip
 #qemu libvirt libvirt-daemon-driver-qemu qemu-kvm
