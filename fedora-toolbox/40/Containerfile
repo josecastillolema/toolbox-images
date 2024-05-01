@@ -1,0 +1,55 @@
+##podman build --build-arg user=$USER -t localhost/toolbox:40 .
+# podman build -t localhost/toolbox:40 .
+
+FROM registry.fedoraproject.org/fedora-toolbox:40
+
+#ARG user
+
+# Disable h264 repo
+RUN dnf config-manager --set-disabled fedora-cisco-openh264
+
+# Update base packages
+#RUN dnf -y upgrade
+
+# Install packages
+# - glibc-static, libzstd-static for ocaml static linking
+# - jq, openssl for kind.sh
+# - ncurses-devel, readline-devel for python readline
+# - openssl-devel for compiling python
+# - sqlite-devel for ipython
+RUN dnf install -y \
+   @development-tools \
+   awscli2 \
+   bats \
+   docker-compose \
+   flatpak-builder \
+   glibc-static \
+   jq \
+   libzstd-static \
+   ncurses-devel \
+   openssl \
+   openssl-devel \
+   p7zip \
+   podman \
+   readline-devel \
+   sqlite-devel \
+   tmate \
+   xev
+# python3-virtualenvwrapper
+# python-pip
+# qemu libvirt libvirt-daemon-driver-qemu qemu-kvm
+
+# Install kcli
+RUN dnf -y copr enable karmab/kcli \
+    && dnf -y install kcli
+
+# Configure virt groups
+#RUN sudo usermod -aG qemu,libvirt $user
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
+
+RUN echo "toolbox create -i localhost/toolbox:40 fedora-toolbox-40"
+RUN echo "toolbox enter"
+
