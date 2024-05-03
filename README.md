@@ -4,9 +4,9 @@ Collection of [toolbox](https://github.com/containers/toolbox/) images.
 ## fedora-toolbox (default)
 
 ```
-$ cd fedora-toolbox/39
-$ podman build -t localhost/toolbox-local:39 fedora-toolbox-39
-$ toolbox create -i localhost/toolbox-local:39 fedora-toolbox-39
+$ cd fedora-toolbox/40
+$ podman build -t localhost/toolbox-local:40 fedora-toolbox-40
+$ toolbox create -i localhost/toolbox-local:40 fedora-toolbox-40
 $ toolbox enter
 ```
 
