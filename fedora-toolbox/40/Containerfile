@@ -16,6 +16,7 @@ RUN dnf config-manager --set-disabled fedora-cisco-openh264
 # - jq, openssl for kind.sh
 # - ncurses-devel, readline-devel for python readline
 # - openssl-devel for compiling python
+# - podman only for podman-completion
 # - sqlite-devel for ipython
 RUN dnf install -y \
    @development-tools \
@@ -30,6 +31,7 @@ RUN dnf install -y \
    openssl \
    openssl-devel \
    p7zip \
+   podman \
    podman-remote \
    readline-devel \
    sqlite-devel \
