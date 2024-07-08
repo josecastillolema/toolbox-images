@@ -34,6 +34,7 @@ RUN dnf install -y \
    podman \
    podman-remote \
    readline-devel \
+   shellcheck \
    sqlite-devel \
    tmate \
    xev
