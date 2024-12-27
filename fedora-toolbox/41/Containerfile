@@ -45,8 +45,8 @@ RUN dnf install -y \
 # qemu libvirt libvirt-daemon-driver-qemu qemu-kvm
 
 # Install kcli
-RUN dnf -y copr enable karmab/kcli \
-    && dnf -y install kcli
+#RUN dnf -y copr enable karmab/kcli \
+#    && dnf -y install kcli
 
 # Configure virt groups
 #RUN sudo usermod -aG qemu,libvirt $user
