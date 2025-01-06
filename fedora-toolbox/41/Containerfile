@@ -33,6 +33,7 @@ RUN dnf install -y \
    openssl \
    openssl-devel \
    p7zip \
+   perf \
    podman \
    podman-remote \
    readline-devel \
