@@ -1,0 +1,48 @@
+# podman build -t localhost/toolbox:42 .
+
+FROM registry.fedoraproject.org/fedora-toolbox:42
+
+#ARG user
+
+# Disable h264 repo
+RUN sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-cisco-openh264.repo
+
+# Update base packages
+#RUN dnf -y upgrade
+
+# Install packages
+# - glibc-static, libzstd-static for ocaml static linking
+# - jq, openssl for kind.sh
+# - ncurses-devel, readline-devel for python readline
+# - openssl-devel, libffi-devel for compiling python
+# - podman only for podman-completion
+# - sqlite-devel for ipython
+RUN dnf install -y \
+   @development-tools \
+   awscli2 \
+   bats \
+   docker-compose \
+   flatpak-builder \
+   fzf \
+   jq \
+   libffi-devel \
+   ncurses-devel \
+   openssl \
+   openssl-devel \
+   p7zip \
+   perf \
+   podman \
+   podman-remote \
+   readline-devel \
+   shellcheck \
+   sqlite-devel \
+   tmate \
+   xev
+
+# Clean
+RUN dnf clean all \
+    && rm -rf /var/cache/dnf
+
+RUN echo "toolbox create -i localhost/toolbox:42 fedora-toolbox-42"
+RUN echo "toolbox enter"
+
