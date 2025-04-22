@@ -16,6 +16,7 @@ RUN sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-cisco-openh264.r
 # - ncurses-devel, readline-devel for python readline
 # - openssl-devel, libffi-devel for compiling python
 # - podman only for podman-completion
+# - python3.11 for orion
 # - sqlite-devel for ipython
 RUN dnf install -y \
    @development-tools \
@@ -33,6 +34,7 @@ RUN dnf install -y \
    perf \
    podman \
    podman-remote \
+   python3.11 \
    readline-devel \
    shellcheck \
    sqlite-devel \
