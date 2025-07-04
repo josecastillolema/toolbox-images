@@ -38,8 +38,10 @@ RUN dnf install -y \
    readline-devel \
    shellcheck \
    sqlite-devel \
+   telnet \
    tmate \
-   xev
+   xev \
+   yq
 
 # Clean
 RUN dnf clean all \
