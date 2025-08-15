@@ -19,29 +19,28 @@ RUN sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-cisco-openh264.r
 # - python3.11 for orion
 # - sqlite-devel for ipython
 RUN dnf install -y \
-   @development-tools \
-   awscli2 \
-   bats \
-   docker-compose \
-   flatpak-builder \
-   fzf \
-   jq \
-   libffi-devel \
-   ncurses-devel \
-   openssl \
-   openssl-devel \
-   p7zip \
-   perf \
-   podman \
-   podman-remote \
-   python3.11 \
-   readline-devel \
-   shellcheck \
-   sqlite-devel \
-   telnet \
-   tmate \
-   xev \
-   yq
+    @development-tools \
+    awscli2 \
+    bats \
+    docker-compose \
+    fzf \
+    jq \
+    libffi-devel \
+    ncurses-devel \
+    openssl \
+    openssl-devel \
+    p7zip \
+    perf \
+    podman \
+    podman-remote \
+    python3.11 \
+    readline-devel \
+    shellcheck \
+    sqlite-devel \
+    telnet \
+    tmate \
+    xev \
+    yq
 
 # Clean
 RUN dnf clean all \
