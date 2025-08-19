@@ -2,8 +2,6 @@
 
 FROM registry.fedoraproject.org/fedora-toolbox:42
 
-#ARG user
-
 # Disable h264 repo
 RUN sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-cisco-openh264.repo
 
@@ -18,10 +16,13 @@ RUN sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-cisco-openh264.r
 # - podman only for podman-completion
 # - python3.11 for orion
 # - sqlite-devel for ipython
+# - xdg-open for claude-desktop
+#  bats \
+#  p7zip \
+#  podman \
 RUN dnf install -y \
     @development-tools \
     awscli2 \
-    bats \
     docker-compose \
     fzf \
     jq \
@@ -29,9 +30,7 @@ RUN dnf install -y \
     ncurses-devel \
     openssl \
     openssl-devel \
-    p7zip \
     perf \
-    podman \
     podman-remote \
     python3.11 \
     readline-devel \
@@ -39,6 +38,9 @@ RUN dnf install -y \
     sqlite-devel \
     telnet \
     tmate \
+    wdisplays \
+    wl-mirror \
+    xdg-open \
     xev \
     yq
 
