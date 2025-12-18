@@ -17,7 +17,6 @@ RUN sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-cisco-openh264.r
 # - podman only for podman-completion
 # - python3.11 for orion
 # - sqlite-devel for ipython
-# - xdg-open for claude-desktop
 #  bats \
 #  p7zip \
 #  podman \
@@ -32,7 +31,9 @@ RUN dnf install -y \
     nodejs-npm \
     openssl \
     openssl-devel \
+    pass \
     perf \
+    pinentry-gnome3 \
     podman-remote \
     python3.11 \
     readline-devel \
@@ -40,11 +41,35 @@ RUN dnf install -y \
     sqlite-devel \
     telnet \
     tmate \
+    trash-cli \
     wdisplays \
     wl-mirror \
-    xdg-open \
     xev \
-    yq
+    yq \
+    --exclude=
+    glib-networking,\
+    logrotate,\
+    low-memory-monitor,\
+    mlocate,\
+    nodejs-docs,\
+    pipewire,\
+    podman,\
+    upower,\
+    xdg-desktop-portal,\
+    xdg-desktop-portal-gtk
+
+# Remove packages
+RUN dnf -y remove \
+    glib-networking \
+    logrotate \
+    low-memory-monitor \
+    mlocate \
+    nodejs-docs \
+    pipewire \
+    podman \
+    upower \
+    xdg-desktop-portal \
+    xdg-desktop-portal-gtk
 
 # Clean
 RUN dnf clean all \
