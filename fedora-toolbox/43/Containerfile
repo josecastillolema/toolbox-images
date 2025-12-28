@@ -25,6 +25,7 @@ RUN dnf install -y \
     awscli2 \
     docker-compose \
     fzf \
+    gh \
     jq \
     libffi-devel \
     ncurses-devel \
