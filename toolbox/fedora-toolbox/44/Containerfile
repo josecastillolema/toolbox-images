@@ -11,6 +11,7 @@ RUN sed -i -e "s,enabled=1,enabled=0,g" /etc/yum.repos.d/fedora-cisco-openh264.r
 # Install packages
 # - jq, openssl for kind.sh
 # - podman only for podman-completion
+# - python3-pyyaml for release
 #  bats \
 #  p7zip \
 #  podman \
@@ -30,6 +31,7 @@ RUN dnf install -y \
     perf \
     pinentry-gnome3 \
     podman-remote \
+    python3-pyyaml \
     shellcheck \
     telnet \
     tmate \
